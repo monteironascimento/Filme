@@ -1,19 +1,33 @@
 package br.com.monteiro.filme.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "produtor_max")
-public class Produtor {
+@Table(name = "produtor_min")
+public class ProdutorMinView implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 
+	@Column(name = "producer")
 	private String producer;
-	private Long interva;
+
+	@Column(name = "interva")
+	private Long interval;
+
+	@Column(name = "previousWin")
 	private Long previousWin;
+
+	@Column(name = "followingWin")
 	private Long followingWin;
 
 	
@@ -25,12 +39,12 @@ public class Produtor {
 		return producer;
 	}
 
-	public void setInterva(Long interva) {
-		this.interva = interva;
+	public void setInterval(Long interval) {
+		this.interval = interval;
 	}
 
-	public Long getInterva() {
-		return interva;
+	public Long getInterval() {
+		return interval;
 	}
 
 	public void setPreviousWin(Long previousWin) {

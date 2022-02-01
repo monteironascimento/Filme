@@ -4,19 +4,19 @@ import java.util.List;
 
 public class Premio {
 
-    private List<Produtor> min ;
-    private List<Produtor> max;
+    private List<ProdutorMinView> min ;
+    private List<ProdutorMaxView> max;
 
-    public List<Produtor> getMax() {
+    public List<ProdutorMaxView> getMax() {
         return max;
     }
-    public List<Produtor> getMin() {
+    public List<ProdutorMinView> getMin() {
         return min;
     }
-    public void setMax(List<Produtor> maxList) {
+    public void setMax(List<ProdutorMaxView> maxList) {
         this.max = maxList;
     }
-    public void setMin(List<Produtor> minList) {
+    public void setMin(List<ProdutorMinView> minList) {
         this.min = minList;
     }
         

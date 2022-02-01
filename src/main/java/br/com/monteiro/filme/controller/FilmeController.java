@@ -23,9 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.monteiro.filme.model.Filme;
-import br.com.monteiro.filme.model.Produtor;
+import br.com.monteiro.filme.model.Premio;
+import br.com.monteiro.filme.model.ProdutorMaxView;
+import br.com.monteiro.filme.model.ProdutorMinView;
 import br.com.monteiro.filme.repository.FilmeRepository;
-import br.com.monteiro.filme.repository.ProdutorRepository;
+import br.com.monteiro.filme.repository.ProdutorMaxRepository;
+import br.com.monteiro.filme.repository.ProdutorMinRepository;
 
 
 @RestController
@@ -36,7 +39,10 @@ public class FilmeController {
     FilmeRepository filmeRepository;
 
     @Autowired
-    ProdutorRepository produtorRepository;
+    ProdutorMinRepository produtoMinRepository;
+
+    @Autowired
+    ProdutorMaxRepository produtoMaxRepository;
 
     @PostConstruct
     public void init(){
@@ -50,17 +56,24 @@ public class FilmeController {
     }
 
     @GetMapping("/premios")
-    public ResponseEntity<List<Produtor>> getPremios() {
+    public ResponseEntity<Premio> getPremios() {
         try {
 
-            List<Produtor> produtores = new ArrayList<Produtor>();
+            Premio premio = new Premio();    
+            List<ProdutorMaxView> produtoresMax = new ArrayList<ProdutorMaxView>();
+            List<ProdutorMinView> produtoresMin = new ArrayList<ProdutorMinView>();
 
-            produtorRepository.findAll().forEach(produtores::add);
+            produtoMaxRepository.findAll().forEach(produtoresMax::add);
+            produtoMinRepository.findAll().forEach(produtoresMin::add);
 
-            if (produtores.isEmpty()) {
+            if (produtoresMax.isEmpty() && produtoresMin.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(produtores, HttpStatus.OK);
+
+            premio.setMax(produtoresMax);
+            premio.setMin(produtoresMin);
+
+            return new ResponseEntity<>(premio, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

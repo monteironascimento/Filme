@@ -95,9 +95,8 @@ class FilmeApplicationTests {
 	@Order(8)
 	public void shouldReturnPremios() throws Exception {
 
-		String json = this.mockMvc.perform(get("/api/premios").contentType(MediaType.APPLICATION_JSON_VALUE)
-			.content(new ObjectMapper().writeValueAsString(setObjectToUpdate()))).andExpect(status().isOk()).toString();
-		System.out.println(json);
+		this.mockMvc.perform(get("/api/premios")).andExpect(status().isOk());	
+
 	}
 
 	private Filme setObjectToCreate() throws Exception {

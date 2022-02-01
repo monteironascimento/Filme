@@ -7,8 +7,10 @@ import javax.persistence.*;
 public class Filme {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 
 	@Column(name = "year")
 	private Integer year;
@@ -48,11 +50,11 @@ public class Filme {
 		this.winner = (winner.equals("yes") ? true : false);
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
