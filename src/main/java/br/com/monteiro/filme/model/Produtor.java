@@ -1,9 +1,15 @@
 package br.com.monteiro.filme.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "produtor_max")
 public class Produtor {
 
-	//private Integer id;
+	@Id
+	private Integer id;
 
 	private String producer;
 	private Long interva;

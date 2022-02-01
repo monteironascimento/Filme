@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,8 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.monteiro.filme.model.Filme;
-import br.com.monteiro.filme.model.Premio;
+import br.com.monteiro.filme.model.Produtor;
 import br.com.monteiro.filme.repository.FilmeRepository;
+import br.com.monteiro.filme.repository.ProdutorRepository;
 
 
 @RestController
@@ -35,30 +35,32 @@ public class FilmeController {
     @Autowired
     FilmeRepository filmeRepository;
 
+    @Autowired
+    ProdutorRepository produtorRepository;
 
-	@GetMapping("/carrega")
-    public ResponseEntity<List<Filme>>  carregar() {
+    @PostConstruct
+    public void init(){
+
         try {
-
 			carregaDados();           
-            return new ResponseEntity<>(null, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+           e.printStackTrace();
         }
+
     }
 
     @GetMapping("/premios")
-    public ResponseEntity<Premio> getPremios() {
+    public ResponseEntity<List<Produtor>> getPremios() {
         try {
 
-            /*List<Produtor> filmesMax = produtorRepository.findPremioMax();
-            List<Produtor> filmesMin = produtorRepository.findPremioMin();
+            List<Produtor> produtores = new ArrayList<Produtor>();
 
-            Premio premio = new Premio();
-            premio.setMax(filmesMax);
-            premio.setMin(filmesMin);*/
+            produtorRepository.findAll().forEach(produtores::add);
 
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            if (produtores.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(produtores, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

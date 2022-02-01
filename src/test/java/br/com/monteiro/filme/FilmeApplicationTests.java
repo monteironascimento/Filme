@@ -46,34 +46,22 @@ class FilmeApplicationTests {
 		assertNotNull(mockMvc);
 	}
 
+
 	@Test
 	@Order(2)
-	public void shouldReturnRemoveAllFilmes() throws Exception {
-		this.mockMvc.perform(delete("/api/filmes")).andExpect(status().isNoContent());
-	}
-
-
-	@Test
-	@Order(3)
-	public void shouldFilmes() throws Exception {
-		this.mockMvc.perform(get("/api/carrega")).andExpect(status().isOk());
-	}
-
-	@Test
-	@Order(4)
 	public void shouldReturnGetAllFilmes() throws Exception {
 		this.mockMvc.perform(get("/api/filmes")).andExpect(status().isOk());
 	}
 
 	@Test
-	@Order(5)
+	@Order(3)
 	public void shouldReturnGetFilme() throws Exception {
 		this.mockMvc.perform(get("/api/filmes/1")).andExpect(status().isOk());
 	}
 
 
 	@Test
-	@Order(6)
+	@Order(4)
 	public void shouldReturnCreateFilme() throws Exception {
 		try {
 			this.mockMvc.perform(post("/api/filmes").contentType(MediaType.APPLICATION_JSON)
@@ -84,19 +72,19 @@ class FilmeApplicationTests {
 	}
 
 	@Test
-	@Order(7)
+	@Order(5)
 	public void shouldReturnRemoveFilme() throws Exception {
 		this.mockMvc.perform(delete("/api/filmes/1")).andExpect(status().isNoContent());
 	}
 
 	@Test
-	@Order(8)
+	@Order(6)
 	public void shouldReturnValidRemoveFilme() throws Exception {
 		this.mockMvc.perform(get("/api/filme/1")).andExpect(status().isNotFound());
 	}
 
 	@Test
-	@Order(9)
+	@Order(7)
 	public void shouldReturnUpdateFilme() throws Exception {
 
 		this.mockMvc.perform(put("/api/filmes/5").contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -104,7 +92,7 @@ class FilmeApplicationTests {
 	}
 	
 	@Test
-	@Order(10)
+	@Order(8)
 	public void shouldReturnPremios() throws Exception {
 
 		String json = this.mockMvc.perform(get("/api/premios").contentType(MediaType.APPLICATION_JSON_VALUE)
