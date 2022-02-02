@@ -51,7 +51,7 @@ Projeto Desenvolvido, Backend CRUD de informações de Filmes, com base em plani
 
 ## :rocket: Tecnologias ##
 
-The following tools were used in this project:
+Neste projeto foram utilizadas as seguintes ferramentas:
 
 - [Git](https://git-scm.com)
 - [OpenJdk-17](https://openjdk.java.net/projects/jdk/17/)
@@ -61,7 +61,7 @@ The following tools were used in this project:
 
 ## :white_check_mark: Requisitos ##
 
-Before starting :checkered_flag:, você precisa ter o [Git](https://git-scm.com), [OpenJdk-17](https://openjdk.java.net/projects/jdk/17/) e o [Maven](https://maven.apache.org/) instalados.
+Antes de começar :checkered_flag:, você precisa ter o [Git](https://git-scm.com), [OpenJdk-17](https://openjdk.java.net/projects/jdk/17/) e o [Maven](https://maven.apache.org/) instalados.
 
 ## :checkered_flag: Iniciando ##
 
@@ -79,11 +79,10 @@ $ mvn clean integration-test
 $ mvn spring-boot:run
 
 # Gerar Build do Projeto
+# ./target/Filme-0.0.1-SNAPSHOT.jar
 $ mvn clean package
-#Acessar no diretorio ./target/Filme-0.0.1-SNAPSHOT.jar
 
-Necessário executar o .jar e a aplicação estara rodando na porta a baixo.
-O arquivo movielist.csv com informações do filme deve estar no mesmo diretório que o jar.
+# Copiar o arquivo movielist.csv na raiz arquivos jar.
 # O servidor sera iniciado em <http://localhost:9000>
 
 ```
