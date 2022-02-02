@@ -5,7 +5,7 @@
   <!-- <a href="https://filme.netlify.app">Demo</a> -->
 </div>
 
-<h1 align="center">Filme</h1>
+<h1 align="center">Filme API REST - Sprint Boot</h1>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/monteironascimento/filme?color=56BEB8">
@@ -57,6 +57,7 @@ The following tools were used in this project:
 - [OpenJdk-17](https://openjdk.java.net/projects/jdk/17/)
 - [ApacheMaven](https://maven.apache.org/)
 - [Database-H2](https://www.h2database.com/)
+- [Spring Boot](https://spring.io/guides)
 
 ## :white_check_mark: Requisitos ##
 
@@ -79,12 +80,8 @@ $ mvn spring-boot:run
 
 # O servidor sera iniciado em <http://localhost:9000>
 
-
-
-
-
-```
 # Acessar o repositorio de dados <http://localhost:9000/h2-ui>
 <img src="./.github/database.png" />
 
+```
 &#xa0;
