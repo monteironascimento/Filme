@@ -83,8 +83,8 @@ $ mvn clean package
 #Acessar no diretorio ./target/Filme-0.0.1-SNAPSHOT.jar
 
 Necessário executar o .jar e a aplicação estara rodando na porta a baixo.
+O arquivo movielist.csv com informações do filme deve estar no mesmo diretório que o jar.
 # O servidor sera iniciado em <http://localhost:9000>
-
 
 ```
 ## Acesso ao Database ##
