@@ -85,10 +85,11 @@ $ mvn clean package
 # Copiar o arquivo movielist.csv na raiz arquivos jar.
 # O servidor sera iniciado em <http://localhost:9000>
 
-```
-## Acesso ao Database ##
 
-<p> Acessar o repositorio de dados <http://localhost:9000/h2-ui></p>
+# Acessar o repositorio de dados <http://localhost:9000/h2-ui>
+
+```
+## Credencial ao Database ##
 
 <img src="./.github/database.png" />
 
