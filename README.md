@@ -78,6 +78,11 @@ $ mvn clean integration-test
 # Executar o Projeto
 $ mvn spring-boot:run
 
+# Gerar Build do Projeto
+$ mvn clean package
+#Acessar no diretorio ./target/Filme-0.0.1-SNAPSHOT.jar
+
+Necessário executar o .jar e a aplicação estara rodando na porta a baixo.
 # O servidor sera iniciado em <http://localhost:9000>
 
 
