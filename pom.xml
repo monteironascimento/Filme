@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>br.com.monteiro</groupId>
 	<artifactId>Filme</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Filme</name>
+	<version>1.0.0</version>
+	<name>Filme TexoIT</name>
 	<description>Projet Texo IT</description>
 	<properties>
 		<java.version>17</java.version>
