@@ -47,7 +47,8 @@ Projeto Desenvolvido, Backend CRUD de informações de Filmes, com base em plani
 ## :sparkles: Recursos ##
 
 :heavy_check_mark: Objetivo consultar os dois produtores com maior intervalo de premiãção entre seus filmes. 
-:heavy_check_mark: - Objetivo consultar os dois produtores com menor intervalo de premiãção entre seus filmes. 1;
+
+:heavy_check_mark: - Objetivo consultar os dois produtores com menor intervalo de premiãção entre seus filmes.
 
 ## :rocket: Tecnologias ##
 

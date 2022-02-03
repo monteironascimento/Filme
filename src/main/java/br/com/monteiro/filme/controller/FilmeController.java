@@ -5,7 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -20,15 +24,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.monteiro.filme.model.Filme;
-import br.com.monteiro.filme.model.Premio;
-import br.com.monteiro.filme.model.ProdutorMaxView;
-import br.com.monteiro.filme.model.ProdutorMinView;
+import br.com.monteiro.filme.model.PremioView;
+import br.com.monteiro.filme.model.Produtor;
 import br.com.monteiro.filme.repository.FilmeRepository;
-import br.com.monteiro.filme.repository.ProdutorMaxRepository;
-import br.com.monteiro.filme.repository.ProdutorMinRepository;
 
 
 @RestController
@@ -37,12 +39,6 @@ public class FilmeController {
 
     @Autowired
     FilmeRepository filmeRepository;
-
-    @Autowired
-    ProdutorMinRepository produtoMinRepository;
-
-    @Autowired
-    ProdutorMaxRepository produtoMaxRepository;
 
     @PostConstruct
     public void init(){
@@ -55,30 +51,37 @@ public class FilmeController {
 
     }
 
+
     @GetMapping("/premios")
-    public ResponseEntity<Premio> getPremios() {
+    public ResponseEntity<PremioView> getAllFilmesV2() {
         try {
+            List<Produtor> produtores = new ArrayList<Produtor>();
+            List<Filme> filmes = new ArrayList<Filme>();
+            HashMap<String, ArrayList<Integer>> map = new HashMap<>();
 
-            Premio premio = new Premio();    
-            List<ProdutorMaxView> produtoresMax = new ArrayList<ProdutorMaxView>();
-            List<ProdutorMinView> produtoresMin = new ArrayList<ProdutorMinView>();
+            filmeRepository.findByWinnerTrue().forEach(filmes::add);
 
-            produtoMaxRepository.findAll().forEach(produtoresMax::add);
-            produtoMinRepository.findAll().forEach(produtoresMin::add);
+            map = ordenaProdutores(map, filmes);
 
-            if (produtoresMax.isEmpty() && produtoresMin.isEmpty()) {
+            produtores = buscaIntervalosPremios(produtores, map);
+
+            if (produtores.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
+          
+            PremioView premios = ordernarPremios(produtores);
 
-            premio.setMax(produtoresMax);
-            premio.setMin(produtoresMin);
+            if (premios == null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            
+            return new ResponseEntity<>(premios, HttpStatus.OK);
 
-            return new ResponseEntity<>(premio, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 
     @GetMapping("/filmes")
@@ -243,6 +246,80 @@ public class FilmeController {
         }
     }
 
+    private PremioView ordernarPremios(List<Produtor> produtores) throws Exception {
+        PremioView premios = new PremioView();
+
+        Collections.sort(produtores);
+        
+        premios.getMax().add(produtores.get(produtores.size() - 1));
+        premios.getMin().add(produtores.get(0));
+
+        return premios;
+    }
+
+    private HashMap<String, ArrayList<Integer>> ordenaProdutores(HashMap<String, ArrayList<Integer>> map, List<Filme> filmes) throws Exception {
+
+        for (Filme filme : filmes) {
+
+            if(filme.getWinner().equals("yes")){
+
+                String[] producer =  filme.getProducers().replaceAll(", ", ";").replaceAll(" , ", ";").replaceAll(" and ", ";").split(";");
+    
+                
+                for (String objProdutor : producer) {
+                    
+                    if(map.get(objProdutor) == null) {
+
+                        ArrayList<Integer> anos = new ArrayList<>();
+                        anos.add(filme.getYear());
+                        
+                        map.put(objProdutor, anos);
+                    }else{
+
+                        ArrayList<Integer> anos =map.get(objProdutor);  
+                        Collections.sort(anos);
+                        anos.add(filme.getYear()); 
+                    }
+
+                }
+            }
+            
+            
+        }
+        return map;
+    }
+
+    private List<Produtor> buscaIntervalosPremios(List<Produtor> produtores, HashMap<String, ArrayList<Integer>> map) throws Exception {
+
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            
+            Map.Entry pairs = (Map.Entry) it.next();
+            ArrayList<Integer> anos = (ArrayList<Integer>) pairs.getValue();
+            if(anos.size() < 2){
+                it.remove();
+            }else{
+                
+                Integer previousWin = 0;     
+                for (Integer followingWin : anos) {
+
+                    if(previousWin > 0){
+                       
+                        Integer interval = (followingWin - previousWin);
+
+                        produtores.add(new Produtor(String.valueOf(pairs.getKey()), interval, previousWin, followingWin));  
+                        previousWin = followingWin;  
+                    }else{
+                        previousWin = followingWin;  
+                    }
+
+                }
+
+            }
+           
+        }
+        return produtores;
+    }
 
 }
 
