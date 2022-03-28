@@ -1,13 +1,13 @@
-package br.com.monteiro.filme;
+package br.com.monteiro.mercadolivre;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FilmeApplication {
+public class DnaApplication {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(FilmeApplication.class, args);
+		SpringApplication.run(DnaApplication.class, args);
 
 	}
 

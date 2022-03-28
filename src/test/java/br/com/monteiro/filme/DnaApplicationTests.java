@@ -4,30 +4,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
-import br.com.monteiro.filme.model.Filme;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles("test")
 @TestMethodOrder(OrderAnnotation.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class FilmeApplicationTests {
+class DnaApplicationTests {
 
 	@Test
 	void contextLoads() {
@@ -36,11 +24,11 @@ class FilmeApplicationTests {
 	@LocalServerPort
     private int port;
 	 
-
+  /*
     @Autowired
     private MockMvc mockMvc;
 	 
-    @Test
+  @Test
 	@Order(1)
 	public void contextLoad() {
 		assertNotNull(mockMvc);
@@ -120,6 +108,6 @@ class FilmeApplicationTests {
 		filme.setWinner("");
 
 		return filme;
-	}
+	}*/
 
 }

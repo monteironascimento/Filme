@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.monteiro</groupId>
-	<artifactId>Filme</artifactId>
+	<artifactId>MercadoLivre</artifactId>
 	<version>1.0.0</version>
-	<name>Filme TexoIT</name>
-	<description>Projet Texo IT</description>
+	<name>MercadoLivre</name>
+	<description>MercadoLivre</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
